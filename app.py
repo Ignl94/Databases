@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/plantsDatabase"
 mongo = PyMongo(app)
-mongo.db.plants.drop()
-mongo.db.harvests.drop()
 ############################################################
 # ROUTES
 ############################################################
@@ -68,7 +66,7 @@ def detail(plant_id):
     # TODO: Replace the following line with a database call to retrieve *one*
     # plant from the database, whose id matches the id passed in via the URL.
 
-    plant_to_show = mongo.db.plants.find_one({'name': plant_id})  # NOT SURE
+    plant_to_show = mongo.db.plants.find_one({'name': plant_id})
 
     # TODO: Use the `find` database operation to find all harvests for the
     # plant's id.
@@ -111,7 +109,7 @@ def edit(plant_id):
         # TODO: Make an `update_one` database call to update the plant with the
         # given id. Make sure to put the updated fields in the `$set` object.
         # NEED HELP
-        searchParam = {'plant_id': plant_id}
+        searchParam = {'name': plant_id}
         changeParam = {'$set': {'plant_id': plant_id}}
         mongo.db.plants.update_one(searchParam, changeParam)
 
